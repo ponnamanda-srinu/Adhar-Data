@@ -149,15 +149,27 @@
     </div>
 
     <script>
+        const firstNames = ["Rama", "Venkanna", "Peddi", "Srinivas", "Trisha", "Tanmayi", "Siva", "Krishna", "Raju", "Ramesh", "Suresh", "Lakshmi", "Priya", "Rahul", "Karthik", "Sneha", "Kiran", "Vijay", "Anil", "Bhavya", "Nithin"];
+        const surnames = ["Reddy", "Goud", "Rao", "Ponnamanda", "Vemuri", "Chiluka", "Sharma", "Yadav", "Patel", "Das", "Kumar", "Singh", "Naidu", "Chowdary"];
+
         const aadhaarData = [];
         for (let i = 1; i <= 100; i++) {
             const randomAadhaar = "3000" + Math.floor(10000000 + Math.random() * 90000000);
+            const randomName = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const randomSurname = surnames[Math.floor(Math.random() * surnames.length)];
+            const randomFather = firstNames[Math.floor(Math.random() * firstNames.length)];
+            
+            // Randomly select year between 1970 and 2005 for realistic DOB
+            const randomYear = Math.floor(1970 + Math.random() * 35);
+            const randomMonth = String(Math.floor(1 + Math.random() * 12)).padStart(2, '0');
+            const randomDay = String(Math.floor(1 + Math.random() * 28)).padStart(2, '0');
+
             aadhaarData.push({
                 aadhaar: randomAadhaar,
-                name: "Name " + i,
-                surname: "Surname " + i,
-                fatherName: "Father " + i,
-                dob: "01/01/1990",
+                name: randomName,
+                surname: randomSurname,
+                fatherName: randomFather,
+                dob: `${randomDay}/${randomMonth}/${randomYear}`,
                 gender: i % 2 === 0 ? "Female" : "Male"
             });
         }
