@@ -77,6 +77,10 @@
             border-collapse: collapse;
         }
 
+        tr {
+            page-break-inside: avoid;
+        }
+
         td {
             border: 1px solid var(--border-color);
             padding: 1.5rem;
@@ -145,14 +149,17 @@
     </div>
 
     <script>
-        const aadhaarData = [
-            { aadhaar: "300001166188", name: "Rama", surname: "Reddy", fatherName: "Siva", gender: "Male" },
-            { aadhaar: "300003588914", name: "Venkanna", surname: "Goud", fatherName: "Raju", gender: "Male" },
-            { aadhaar: "300012059680", name: "Peddi", surname: "Rao", fatherName: "Krishna", gender: "Male" },
-            { aadhaar: "300018706840", name: "Srinivas", surname: "Ponnamanda", fatherName: "Apparao", gender: "Male" },
-            { aadhaar: "300015616918", name: "Trisha", surname: "Vemuri", fatherName: "Ramesh", gender: "Female" },
-            { aadhaar: "300009202761", name: "Tanmayi", surname: "Chiluka", fatherName: "Suresh", gender: "Female" },
-        ];
+        const aadhaarData = [];
+        for (let i = 1; i <= 100; i++) {
+            const randomAadhaar = "3000" + Math.floor(10000000 + Math.random() * 90000000);
+            aadhaarData.push({
+                aadhaar: randomAadhaar,
+                name: "Name " + i,
+                surname: "Surname " + i,
+                fatherName: "Father " + i,
+                gender: i % 2 === 0 ? "Female" : "Male"
+            });
+        }
 
         function generateTable() {
             const table = document.getElementById('qr-table');
