@@ -157,6 +157,7 @@
                 name: "Name " + i,
                 surname: "Surname " + i,
                 fatherName: "Father " + i,
+                dob: "01/01/1990",
                 gender: i % 2 === 0 ? "Female" : "Male"
             });
         }
@@ -216,7 +217,15 @@
             
             // Generate QR Codes after HTML is injected
             aadhaarData.forEach((item, index) => {
-                const qrText = `Aadhaar: ${item.aadhaar} | Name: ${item.name} ${item.surname} | S/O: ${item.fatherName} | Gender: ${item.gender}`;
+                const qrData = {
+                    aadhaar: item.aadhaar,
+                    name: item.name,
+                    surname: item.surname,
+                    fatherName: item.fatherName,
+                    dob: item.dob,
+                    gender: item.gender
+                };
+                const qrText = JSON.stringify(qrData);
                 new QRCode(document.getElementById(`qr-${index}`), {
                     text: qrText,
                     width: 150,
