@@ -115,9 +115,14 @@
         }
 
         .qr-code {
-            padding: 0.5rem;
+            padding: 10px;
             background: white;
             border-radius: 4px;
+            min-width: 200px;
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         @media print {
@@ -184,64 +189,15 @@
                 
                 tableHTML += '<tr>';
                 
-                // First column
-                if (item1) {
-                    tableHTML += `
-                        <td>
-                            <div class="cell-content">
-                                <div class="text-details">
-                                    <div class="aadhaar-num">${item1.aadhaar}</div>
-                                    <div class="name">Name: ${item1.name} ${item1.surname}</div>
-                                    <div class="family-id">D/O, S/O: ${item1.fatherName}</div>
-                                    <div class="family-id">Gender: ${item1.gender}</div>
-                                </div>
-                                <div id="qr-${i}" class="qr-code"></div>
-                            </div>
-                        </td>
-                    `;
-                } else {
-                    tableHTML += '<td></td>';
-                }
-
-                // Second column
-                if (item2) {
-                    tableHTML += `
-                        <td>
-                            <div class="cell-content">
-                                <div class="text-details">
-                                    <div class="aadhaar-num">${item2.aadhaar}</div>
-                                    <div class="name">Name: ${item2.name} ${item2.surname}</div>
-                                    <div class="family-id">D/O, S/O: ${item2.fatherName}</div>
-                                    <div class="family-id">Gender: ${item2.gender}</div>
-                                </div>
-                                <div id="qr-${i+1}" class="qr-code"></div>
-                            </div>
-                        </td>
-                    `;
-                } else {
-                    tableHTML += '<td></td>';
-                }
-
-                tableHTML += '</tr>';
-            }
-            
-            table.innerHTML = tableHTML;
+               
             
             // Generate QR Codes after HTML is injected
             aadhaarData.forEach((item, index) => {
-                const qrData = {
-                    aadhaar: item.aadhaar,
-                    name: item.name,
-                    surname: item.surname,
-                    fatherName: item.fatherName,
-                    dob: item.dob,
-                    gender: item.gender
-                };
-                const qrText = JSON.stringify(qrData);
+                const qrText = `Aadhaar: ${item.aadhaar}\nName: ${item.name} ${item.surname}\nS/O: ${item.fatherName}\nDOB: ${item.dob}\nGender: ${item.gender}`;
                 new QRCode(document.getElementById(`qr-${index}`), {
                     text: qrText,
-                    width: 150,
-                    height: 150,
+                    width: 200,
+                    height: 200,
                     colorDark : "#000000",
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.M
